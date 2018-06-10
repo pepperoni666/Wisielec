@@ -2,7 +2,7 @@
 
 int main(){
 	Gameplay* game = new Gameplay();
-	game->initPlayers();
-	//while (game->game());
-	//TODO: zakonczenie
+	game->initPlayers(); //podanie ilosci i typow graczy
+	while (game->game()); //rozgrywka
+	return 0;
 }

@@ -1,1 +1,8 @@
-dupa
+samochod
+samolot
+telefon
+butelka
+slowa
+wisielec
+notes
+egzamin

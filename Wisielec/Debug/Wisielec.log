@@ -1,4 +1,13 @@
 ﻿  gameplay.cpp
   main.cpp
+  player.cpp
+e:\stuff\myxamarinproject\wisielec\wisielec\player.cpp(35): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  reader.cpp
+e:\stuff\myxamarinproject\wisielec\wisielec\reader.cpp(5): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\stuff\myxamarinproject\wisielec\wisielec\reader.cpp(35): warning C4018: '<': signed/unsigned mismatch
+  screen.cpp
+e:\stuff\myxamarinproject\wisielec\wisielec\screen.cpp(9): warning C4018: '<': signed/unsigned mismatch
+e:\stuff\myxamarinproject\wisielec\wisielec\screen.cpp(12): warning C4018: '<': signed/unsigned mismatch
+e:\stuff\myxamarinproject\wisielec\wisielec\screen.cpp(18): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
   Wisielec.vcxproj -> E:\stuff\MyXamarinProject\Wisielec\Debug\Wisielec.exe

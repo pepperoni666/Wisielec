@@ -3,13 +3,6 @@
 Gameplay::Gameplay() : screenManager() {
 	playerList = NULL;
 	wordManager = NULL;
-	/*
-	Player* y = new Player("Marek");
-	Player* t = new Player("Konrad", y);
-	Player* te = new Player("Beata", t);
-	Player* bot = new Player_bot(te);
-	playerList = bot;
-	screenManager.printPlayground(playerList, wordManager->getWord(), wordManager->getUsed());*/
 }
 
 void Gameplay::initPlayers() {
@@ -51,8 +44,54 @@ void Gameplay::addPlayer() {
 	}
 }
 
+template<typename T>
+void resetAll(T* ptr) {
+	for (; ptr != NULL; ptr = ptr->next)
+		ptr->reset();
+}
+
 bool Gameplay::game() {
+	resetAll<Player>(playerList);
 	wordManager = new Reader();
-	//TODO: madrze zrobiona petla rozgrywki
+	if (wordManager->isUnstartable()) {
+		screenManager.end();
+		return false;
+	}
+	Player* ptr = playerList;
+	while (!wordManager->isFinished() && areValidPlayers()) {
+		screenManager.printPlayground(playerList, wordManager->getWord(), wordManager->getUsed());
+		if (ptr->getStage() < 7) {
+			string tmp = ptr->gues(wordManager->getGuesed(), wordManager->getUsed());
+			if (tmp.length() > 3) {
+				switch (wordManager->tryWord(tmp)) {
+				case 2:
+					ptr->incrStage();
+					break;
+				case 0:
+					ptr->lose();
+					break;
+				default:
+					break;
+				}
+			}
+			else if (!wordManager->tryChar(tmp))
+				ptr->incrStage();
+		}
+		if (ptr->next != NULL)
+			ptr = ptr->next;
+		else
+			ptr = playerList;
+	}
+	screenManager.printPlayground(playerList, wordManager->getWord(), wordManager->getUsed());
+	return screenManager.restart();
+}
+
+bool Gameplay::areValidPlayers() {
+	Player* tmp = playerList;
+	for (; tmp != NULL; tmp = tmp->next) {
+		if (tmp->getStage() < 7)
+			return true;
+	}
+	wordManager->forceFinish();
 	return false;
 }
